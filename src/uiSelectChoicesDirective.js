@@ -14,7 +14,6 @@ uis.directive('uiSelectChoices',
     },
 
     compile: function(tElement, tAttrs) {
-
       if (!tAttrs.repeat) throw uiSelectMinErr('repeat', "Expected 'repeat' expression.");
 
       return function link(scope, element, attrs, $select, transcludeFn) {
@@ -49,7 +48,13 @@ uis.directive('uiSelectChoices',
 
         $compile(element, transcludeFn)(scope); //Passing current transcludeFn to be able to append elements correctly from uisTranscludeAppend
 
+        var performedFirstSearch = false;
         scope.$watch('$select.search', function(newValue) {
+          console.log(JSON.stringify(newValue));
+          if (!performedFirstSearch) {
+            performedFirstSearch = true;
+            return;
+          }
           if(!$select.open && $select.multiple) $select.activate(false, true);
           $select.activeIndex = $select.tagging.isActivated ? -1 : 0;
           $select.refresh(attrs.refresh);
