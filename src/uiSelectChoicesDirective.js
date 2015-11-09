@@ -50,7 +50,6 @@ uis.directive('uiSelectChoices',
 
         var performedFirstSearch = false;
         scope.$watch('$select.search', function(newValue) {
-          console.log(JSON.stringify(newValue));
           if (!performedFirstSearch) {
             performedFirstSearch = true;
             return;
