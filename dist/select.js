@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.11.2 - 2015-11-23T23:47:24.837Z
+ * Version: 0.11.2 - 2015-11-24T12:41:03.305Z
  * License: MIT
  */
 
@@ -531,7 +531,7 @@ uis.controller('uiSelectCtrl',
     if (!ctrl.open) return;
     if (ctrl.ngModel && ctrl.ngModel.$setTouched) ctrl.ngModel.$setTouched();
     _resetSearchInput();
-    if (skipFocusser !== 0) {
+    if (skipFocusser !== -1) {
     	ctrl.open = false;
     }
 
