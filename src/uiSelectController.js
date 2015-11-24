@@ -291,7 +291,7 @@ uis.controller('uiSelectCtrl',
     if (!ctrl.open) return;
     if (ctrl.ngModel && ctrl.ngModel.$setTouched) ctrl.ngModel.$setTouched();
     _resetSearchInput();
-    if (skipFocusser !== 0) {
+    if (skipFocusser !== -1) {
     	ctrl.open = false;
     }
 
