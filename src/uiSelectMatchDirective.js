@@ -27,6 +27,13 @@ uis.directive('uiSelectMatch', ['uiSelectConfig', function(uiSelectConfig) {
         $select.sizeSearchInput();
       }
 
+      if ($select.onEdit) {
+        element.on('click', function () {
+          scope.id = $select.selected[scope.$selectMultiple.activeMatchIndex].id;
+          scope.$apply($select.onEdit);
+        });
+      }
+
     }
   };
 }]);
