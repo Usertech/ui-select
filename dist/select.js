@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.11.2 - 2015-12-10T10:43:22.781Z
+ * Version: 0.11.2 - 2016-02-02T14:33:33.891Z
  * License: MIT
  */
 
@@ -1177,8 +1177,12 @@ uis.directive('uiSelectMatch', ['uiSelectConfig', function(uiSelectConfig) {
 
       if ($select.onEdit) {
         element.on('click', function () {
+	  if (scope.$selectMultiple) {
+	  	if (scope.$selectMultiple && typeof $select.selected[scope.$selectMultiple.activeMatchIndex] !== 'undefined') {
           scope.id = $select.selected[scope.$selectMultiple.activeMatchIndex].id;
           scope.$apply($select.onEdit);
+        }
+	  }
         });
       }
 

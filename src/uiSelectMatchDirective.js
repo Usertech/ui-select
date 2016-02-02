@@ -29,8 +29,12 @@ uis.directive('uiSelectMatch', ['uiSelectConfig', function(uiSelectConfig) {
 
       if ($select.onEdit) {
         element.on('click', function () {
+	  if (scope.$selectMultiple) {
+	  	if (scope.$selectMultiple && typeof $select.selected[scope.$selectMultiple.activeMatchIndex] !== 'undefined') {
           scope.id = $select.selected[scope.$selectMultiple.activeMatchIndex].id;
           scope.$apply($select.onEdit);
+        }
+	  }
         });
       }
 
