@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.11.2 - 2016-02-02T14:33:33.891Z
+ * Version: 0.11.2 - 2016-08-05T11:30:57.394Z
  * License: MIT
  */
 
@@ -1577,11 +1577,14 @@ uis.directive('uiSelectSingle', ['$timeout','$compile', function($timeout, $comp
 // Make multiple matches sortable
 uis.directive('uiSelectSort', ['$timeout', 'uiSelectConfig', 'uiSelectMinErr', function($timeout, uiSelectConfig, uiSelectMinErr) {
   return {
-    require: '^uiSelect',
-    link: function(scope, element, attrs, $select) {
+    require: ['^^uiSelect', '^ngModel'],
+    link: function(scope, element, attrs, ctrls, $select) {
       if (scope[attrs.uiSelectSort] === null) {
         throw uiSelectMinErr('sort', "Expected a list to sort");
       }
+
+      var $select = ctrls[0];
+      var $ngModel = ctrls[1];
 
       var options = angular.extend({
           axis: 'horizontal'
@@ -1668,6 +1671,8 @@ uis.directive('uiSelectSort', ['$timeout', 'uiSelectConfig', 'uiSelectMinErr', f
         }
 
         move.apply(theList, [droppedItemIndex, newIndex]);
+
+        $ngModel.$setViewValue(Date.now());
 
         scope.$apply(function() {
           scope.$emit('uiSelectSort:change', {
